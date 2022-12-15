@@ -77,7 +77,15 @@ Route::post("studentdashboard/new/add/{studentname}", [database::class, "addnewt
 Route::get('/dashboard/edit/{id}/{teachername}', [database::class, "deletedata"]);
 Route::post('/dashboard/relode/{teachername}', [database::class, "relode"]);
 
-Route::view('adminpanel', 'adminpanel');
+Route::get('adminpanel', [database::class, 'adminpanel']);
+Route::get('teacherstable', [database::class, 'adminteacherstable']);
+Route::get('studentstable', [database::class, 'adminstudentstable']);
+Route::get('adminTeacherdelete/{id}', [database::class, 'adminTeacherdelete']);
+Route::get('emptyteachers', [database::class, 'emptyteachers']);
+Route::get('emptystudents', [database::class, 'emptystudents']);
+Route::get('adminStudentdelete/{id}', [database::class, 'adminStudentdelete']);
+Route::get('adminmail/{email}/{password}/{registration}/{section}/{check}/', [database::class, 'adminMail']);
+Route::view('adminlogout', 'teacherlogin');
 
 Route::get('list/{teachername}', [database::class, 'showteachername']);
 Route::get('list/studentadd/{teachername}', [database::class, 'showStudents']);

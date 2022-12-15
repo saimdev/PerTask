@@ -67,7 +67,7 @@
                     <div class="col col-5"></div>
                 </div>
                 <div class="row w-100 d-flex">
-                    <div class="col col-4 d-flex flex-column align-items-start px-4 py-3">
+                    <div class="col col-3 d-flex flex-column align-items-start px-4 py-3">
                         <a href="/adminpanel" class="d-flex flex-row align-items-center justify-content-center menu-items my-4"><img src="{{asset('/imgs/logos/home.svg')}}" alt=""> Analytics</a>
                         <a href="/teacherstable" class="d-flex flex-row align-items-center justify-content-center menu-items my-3"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-person-lines-fill" viewBox="0 0 16 16" style="margin-right: 0.9rem">
                             <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5 6s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zM11 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm.5 2.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1h-4zm2 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2zm0 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2z"/>
@@ -76,31 +76,39 @@
                         <a href="/projectstable" class="d-flex flex-row align-items-center justify-content-center menu-items my-4"><img src="{{asset('/imgs/logos/edit.svg')}}" alt=""> Projects Management</a>
                         <a href="/adminlogout" class="d-flex flex-row align-items-center justify-content-center menu-items my-3"><img src="{{asset('/imgs/logos/sign-out-alt.svg')}}" alt=""> Logout</a>
                     </div>
-                    <div class="col col-8 p-4 my-2" style="background: black; border-radius: 3rem 0 3rem 0">
-                        <h1 class="h1 fw-bold">Admin Panel</h1>
-                        <div class="mt-4 d-flex justify-content-center flex-wrap">
-                            <div class="d-flex align-items-center flex-column my-2 mx-5">
-                                <h3 class="text-primary">Total Teachers</h3>
-                                <label for="" class="text-white fs-2 fw-bolder">{{$teacherscount}}</label>
-                            </div>
-                            <div class="d-flex align-items-center flex-column my-2 mx-5">
-                                <h3 class="text-primary">Total Students</h3>
-                                <label for="" class="text-white fs-2 fw-bolder">{{$studentscount}}</label>
-                            </div>
-                        </div>
-                        <div class="mt-4 d-flex justify-content-center flex-wrap">
-                            <div class="d-flex align-items-center flex-column mt-1 mx-5">
-                                <a href="emptyteachers"><button class="btn btn-danger">Empty Teachers Data</button></a>
-                            </div>
-                            <div class="d-flex align-items-center flex-column mt-1 mx-5">
-                                <a href="emptystudents"><button class="btn btn-danger">Empty Students Data</button></a>
-                            </div>
-                        </div>
-                        <div class="mt-4 d-flex justify-content-center flex-wrap">
-                            @if (session('message'))
-                              <div class="text-white bg-success text-center" style="padding:0.8rem;background: transparent; font-size:0.8rem; margin-bottom:0.5rem; margin-top:0.7rem; border:none; color:rgb(0, 129, 0); border:none; border-radius:8px;">{{ session('message') }}</div>
-                            @endif
-                        </div>
+                    <div class="col col-9 p-4 my-2 text-white" style="background: black; border-radius: 3rem 0 3rem 0">
+                        <h2 class="h2 fw-bold">Students Management</h2>
+                        <table class="table text-white">
+                            <thead class="text-primary">
+                                <th>Id</th>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Full Name</th>
+                                <th>Section</th>
+                                <th>Registration</th>
+                                <th>Email</th>
+                                <th>Send Email</th>
+                                <th>Delete</th>
+                            </thead>
+                            <tbody>
+                                @foreach ($collection as $item)
+                                <tr>
+                                    <td>{{$item->id}}</td>
+                                    <td>{{$item->fname}}</td>
+                                    <td>{{$item->lname}}</td>
+                                    <td>{{$item->fullname}}</td>
+                                    <td>{{$item->section}}</td>
+                                    <td>{{$item->registration}}</td>
+                                    <td>{{$item->email}}</td>
+                                    <td><a href="adminmail/{{$item->email}}/{{$item->password}}/{{$item->registration}}/{{$item->section}}/{{1}}" class="text-decoration-none text-white"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-envelope-fill" viewBox="0 0 16 16">
+                                        <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555ZM0 4.697v7.104l5.803-3.558L0 4.697ZM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757Zm3.436-.586L16 11.801V4.697l-5.803 3.546Z"/>
+                                      </svg></a></td>
+                                    <td><a href="adminStudentdelete/{{$item->id}}/" class="text-decoration-none text-white"><img src="{{asset('/imgs/logos/trash.svg')}}" style="width: 20px;" alt=""></a></td>
+                                </tr>    
+                                @endforeach
+                                
+                            </tbody>
+                        </table>
                     </div>
 
                     </div>

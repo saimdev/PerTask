@@ -243,6 +243,64 @@ class database extends Controller
        }
     }
 
+    public function adminMail($email, $password, $registration, $section, $check)
+    {
+        
+       if($check==1){
+        $mailData = [
+            'title' => 'Account Registered',
+            'body' => 'You are successfully registered on PerTask, Your Email Address: '.$email.' and Password: '.$password.'. Your Registration Number is '.$registration.' and Section: '.$section,
+        ];
+         
+        Mail::to($email)->send(new DemoMail($mailData));
+            return redirect("/studentstable");
+       }
+       elseif($check==0){
+        $mailData = [
+            'title' => 'Account Registered',
+            'body' => 'You are successfully registered on PerTask, Your Email Address: '.$email.' and Password: '.$password.'. Your Department is '.$registration.' and Qualification: '.$section,
+        ];
+         
+        Mail::to($email)->send(new DemoMail($mailData));
+            return redirect("/teacherstable");
+       }
+    }
+
+    function emptyteachers(){
+        $data = Teacher::all();
+        if($data->count()==0){
+            return redirect()->back()->with('message', "No Teachers Data Found");
+        }else{
+            foreach($data as $user){
+                $user->delete();
+                Schema::dropIfExists($user->fullname);
+                Schema::dropIfExists($user->fullname.'_projects');
+                if(File::exists(public_path('imgs/users/'.$user->fullname.'.jpg'))){
+                    File::delete(public_path('imgs/users/'.$user->fullname.'.jpg'));
+                }
+            }
+            return redirect()->back()->with('message', "Successfully Deleted All Record Related to Teachers");
+        }
+    }
+
+    function emptystudents(){
+        $data = Student::all();
+        if($data->count()==0){
+            return redirect()->back()->with('message', "No Students Data Found");
+        }else{
+            foreach($data as $user){
+                $user->delete();
+                Schema::dropIfExists($user->fullname);
+                Schema::dropIfExists($user->fullname.'_stuprojects');
+                if(File::exists(public_path('imgs/users/'.$user->fullname.'.jpg'))){
+                    File::delete(public_path('imgs/users/'.$user->fullname.'.jpg'));
+                }
+            }
+            return redirect()->back()->with('message', "Successfully Deleted All Record Related to Students");
+        }
+        
+    }
+
     function showProjectsTeacher($teachername, $projectname){
         $data = DB::select("select * from `".$teachername."`");
         // dd($files);
@@ -307,15 +365,45 @@ class database extends Controller
 echo $dt->format('Y-m-d H:i:s');
     }
 
+    function adminPanel(){
+        $teacherData = Teacher::all();
+        $countTeachers = $teacherData->count();
+        $studentData = Student::all();
+        $countStudents = $studentData->count();
+
+        return view('adminpanel')->with('teacherscount', $countTeachers)->with('studentscount', $countStudents);
+    }
+
+    function adminTeacherdelete($id){
+        $data = Teacher::find($id);
+        $name = $data->fullname;
+        $data->delete();
+
+        Schema::dropIfExists($name);
+        Schema::dropIfExists($name.'_projects');
+        if(File::exists(public_path('imgs/users/'.$name.'.jpg'))){
+            File::delete(public_path('imgs/users/'.$name.'.jpg'));
+        }
+        return redirect()->back();
+    }
+
+    function adminStudentdelete($id){
+        $data = Student::find($id);
+        $name = $data->fullname;
+        $data->delete();
+
+        Schema::dropIfExists($name);
+        Schema::dropIfExists($name.'_stuprojects');
+        if(File::exists(public_path('imgs/users/'.$name.'.jpg'))){
+            File::delete(public_path('imgs/users/'.$name.'.jpg'));
+        }
+        return redirect()->back();
+    }
+
     function teacherlogin(Request $request)
     {
-        if($request->email=='admin@gmail.com' && $request->password=='admin'){
-            $teacherData = Teacher::all();
-            $countTeachers = $teacherData->count();
-            $studentData = Student::all();
-            $countStudents = $studentData->count();
-
-            return view('adminpanel')->with('teacherscount', $countTeachers)->with('studentscount', $countStudents);
+        if($request->email=='admin@admin.com' && $request->password=='admin'){
+           return $this->adminPanel();
         }else{
             $auth = 0;
             $userEmail = $request->input('email');
@@ -424,6 +512,16 @@ echo $dt->format('Y-m-d H:i:s');
         return view("addstudent", ['collection'=>$data])->with('teachername', $teachername);
         // return $data;
         // return $data;
+    }
+
+    function adminteacherstable(){
+        $data = Teacher::all();
+        return view('teachersmanagement', ['collection' => $data]);
+    }
+
+    function adminstudentstable(){
+        $data = Student::all();
+        return view('studentsmanagement', ['collection' => $data]);
     }
 
     function backproject($teachername){
