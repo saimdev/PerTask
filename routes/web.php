@@ -80,6 +80,7 @@ Route::post('/dashboard/relode/{teachername}', [database::class, "relode"]);
 Route::get('adminpanel', [database::class, 'adminpanel']);
 Route::get('teacherstable', [database::class, 'adminteacherstable']);
 Route::get('studentstable', [database::class, 'adminstudentstable']);
+Route::get('projectstable', [database::class, 'adminprojectstable']);
 Route::get('adminTeacherdelete/{id}', [database::class, 'adminTeacherdelete']);
 Route::get('emptyteachers', [database::class, 'emptyteachers']);
 Route::get('emptystudents', [database::class, 'emptystudents']);
