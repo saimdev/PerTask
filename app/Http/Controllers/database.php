@@ -309,22 +309,31 @@ echo $dt->format('Y-m-d H:i:s');
 
     function teacherlogin(Request $request)
     {
-        $auth = 0;
-        $userEmail = $request->input('email');
-        $userPass = $request->input('password');
-        $checkData = DB::table("teachers")->where("email", $userEmail)->where("password", $userPass)->get();
-        $auth = count($checkData);
+        if($request->email=='admin@gmail.com' && $request->password=='admin'){
+            $teacherData = Teacher::all();
+            $countTeachers = $teacherData->count();
+            $studentData = Student::all();
+            $countStudents = $studentData->count();
 
-        if ($auth == 1) {
-            
-            foreach ($checkData as $item) {
-                $teachername = $item->fname.'_'.$item->lname; 
+            return view('adminpanel')->with('teacherscount', $countTeachers)->with('studentscount', $countStudents);
+        }else{
+            $auth = 0;
+            $userEmail = $request->input('email');
+            $userPass = $request->input('password');
+            $checkData = DB::table("teachers")->where("email", $userEmail)->where("password", $userPass)->get();
+            $auth = count($checkData);
+
+            if ($auth == 1) {
+                
+                foreach ($checkData as $item) {
+                    $teachername = $item->fname.'_'.$item->lname; 
+                }
+                $request->session()->put('teacheremail', $userEmail);
+                // return redirect('dashboard/'.$teachername);
+                return redirect('dashboard/'.$teachername);
+            } else {
+                return redirect()->back()->with('message', 'Sorry, your email or password was incorrect. Please double-check your credentials.');
             }
-            $request->session()->put('teacheremail', $userEmail);
-            // return redirect('dashboard/'.$teachername);
-            return redirect('dashboard/'.$teachername);
-        } else {
-            return redirect()->back()->with('message', 'Sorry, your email or password was incorrect. Please double-check your credentials.');
         }
 
 

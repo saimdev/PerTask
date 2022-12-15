@@ -53,9 +53,9 @@
         <div class="navbar">
           <div class="container d-flex justify-content-between align-items-center">
             <a class="navbar-brand text-white" href="/">
-              <strong style="color:#3e28ac;">PER-</strong>TASK
+              <strong class="text-primary">PER-</strong>TASK
             </a>
-            <a href="stuSignup" class="text-decoration-none" style="color:#3e28ac;">Student Signup</a>
+            <a href="stuSignup" class="text-decoration-none text-primary">Student Signup</a>
           </div>
         </div>
         <div class="row mt-3">
@@ -169,7 +169,7 @@
                 <button
                   type="submit"
                   class="btn btn-primary w-100 border-0 p-2"
-                  style="background:#3e28ac; color: #f9efaa;"
+                  style="color: #f9efaa;"
                 >
                   Sign up
                 </button>

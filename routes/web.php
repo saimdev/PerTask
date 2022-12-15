@@ -77,7 +77,7 @@ Route::post("studentdashboard/new/add/{studentname}", [database::class, "addnewt
 Route::get('/dashboard/edit/{id}/{teachername}', [database::class, "deletedata"]);
 Route::post('/dashboard/relode/{teachername}', [database::class, "relode"]);
 
-
+Route::view('adminpanel', 'adminpanel');
 
 Route::get('list/{teachername}', [database::class, 'showteachername']);
 Route::get('list/studentadd/{teachername}', [database::class, 'showStudents']);

@@ -18,7 +18,7 @@
         <div class="container-fluid p-3 d-flex flex-column">
             <div class="row w-100 d-flex align-items-center">
                 <div class="col col-4">
-                    <h3 class="fw-bold mx-2"><span class="fw-bold h3" style="color:indigo">PER-</span>TASK</h3>
+                    <h3 class="fw-bold mx-2"><span class="fw-bold h3 text-primary">PER-</span>TASK</h3>
                 </div>
                 <div class="col col-3" >
                     <input class="px-3 py-1 w-100" style="outline:none; background:black; color:gray; border-radius:4px; border:none" type="text" placeholder="Search for anything..">

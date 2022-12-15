@@ -59,7 +59,7 @@
                 <div class="row w-100 d-flex align-items-center">
                     <div class="col col-4">
                         <h3 class="fw-bold mx-2">
-                            <span class="fw-bold h3" style="color: indigo"
+                            <span class="fw-bold h3 text-primary"
                                 >PER-</span
                             >TASK
                         </h3>
@@ -81,8 +81,8 @@
                     <div class="col col-5"></div>
                 </div>
                 <div class="row w-100 d-flex">
-                    <div class="col col-4 d-flex flex-column align-items-start px-4 py-3">
-                        <a href="/studentdashboard/{{$studentname}}" class="d-flex flex-row align-items-center justify-content-center menu-items my-4"><img src="{{asset('/imgs/logos/home.svg')}}" alt=""> Dashboard</a>
+                    <div class="col col-4 d-flex flex-column align-items-start px-2 py-3">
+                        <a href="/studentdashboard/{{$studentname}}" class="d-flex flex-row align-items-center justify-content-center menu-items my-4 p-3 bg-primary" style="border: none; border-radius:8px;"><img src="{{asset('/imgs/logos/home.svg')}}" alt=""> Dashboard</a>
                         <a href="/studentprojects/{{$studentname}}" class="d-flex flex-row align-items-center justify-content-center menu-items my-4"><img src="{{asset('/imgs/logos/edit.svg')}}" alt=""> Projects</a>
                         <a href="/studentprofile/{{$studentname}}" class="d-flex flex-row align-items-center justify-content-center menu-items my-4"><img src="{{asset('/imgs/users/'.$studentname.".jpg")}}" alt="" style="border-radius: 100px; width: 25px; width:25px;"> Profile</a>
                         <a href="/studentsettings/{{$studentname}}" class="d-flex flex-row align-items-center justify-content-center menu-items my-4"><img src="{{asset('/imgs/logos/settings.svg')}}" alt=""> Settings</a>
@@ -144,7 +144,7 @@
                                             <button class="btn btn-primary mb-2 mt-0" type="submit">Update</button>
                                           </tbody>
                                         </table>
-                                        <a class="btn btn-primary bd-highlight mb-3" href="new/{{$studentname}}" role="button" style="background:#3e28ac; border:none; border-radius:100px;">
+                                        <a class="btn btn-primary bd-highlight mb-3 bg-primary" href="new/{{$studentname}}" role="button" style="border:none; border-radius:100px;">
                                             +</a>
                                         {!! $collection->appends(Request::except('page'))->render() !!}
                                         <p class="mt-4" style="font-size: 0.8rem">

@@ -51,9 +51,9 @@ input[type="checkbox"]:focus {
     <div class="navbar">
       <div class="container d-flex justify-content-between align-items-center">
         <a class="navbar-brand text-white" href="/">
-          <strong style="color:#3e28ac;">PER-</strong>TASK
+          <strong class="text-primary">PER-</strong>TASK
         </a>
-        <a href="stuLogin" class="text-decoration-none" style="color:#3e28ac;">Student Login</a>
+        <a href="stuLogin" class="text-decoration-none text-primary" >Student Login</a>
       </div>
     </div>
     <div class="row mt-5">
@@ -106,7 +106,7 @@ input[type="checkbox"]:focus {
             <button
               type="submit"
               class="btn btn-primary w-100 border-0 p-2"
-              style="background: #3e28ac; color: #f9efaa;"
+              style="color: #f9efaa;"
             >
               Sign in
             </button>
